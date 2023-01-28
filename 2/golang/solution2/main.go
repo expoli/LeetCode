@@ -91,23 +91,18 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 根据输入的整数切片进行数字链表的构建，头结点进行特殊处理
 */
 func createANumber(nums []int) *ListNode {
-	var header ListNode
+	var header *ListNode
 	var prev *ListNode
 	for i, num := range nums {
 		// 初始化头结点
 		if i == 0 {
-			header.Val = num
-			header.Next = nil
-			prev = &header
+			header = &ListNode{Val: num}
+			prev = header
 		} else {
 			// 向链表中添加其它的数据结点
-			var temp = ListNode{
-				Val:  num,
-				Next: nil,
-			}
-			prev.Next = &temp
-			prev = &temp
+			prev.Next = &ListNode{Val: num}
+			prev = prev.Next
 		}
 	}
-	return &header
+	return header
 }
