@@ -14,6 +14,11 @@ func main() {
 
 func checkXMatrix(grid [][]int) bool {
 	n := len(grid)
+	m := len(grid[0])
+	// 如果不是方阵直接返回
+	if n == 0 || m != n {
+		return false
+	}
 	for i, row := range grid {
 		// 对角线元素判断
 		if row[i] == 0 || row[n-1-i] == 0 {
