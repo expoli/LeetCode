@@ -1,20 +1,25 @@
 package golang
 
 import (
-	"fmt"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestName(t *testing.T) {
+
+	assertion := assert.New(t)
 	s := "babad"
-	fmt.Println(longestPalindrome(s))
+	assertion.Equal("bab", longestPalindrome(s))
 
 	s = "cbbd"
-	fmt.Println(longestPalindrome(s))
+	assertion.Equal("bb", longestPalindrome(s))
 
 	s = "a"
-	fmt.Println(longestPalindrome(s))
+	assertion.Equal("a", longestPalindrome(s))
 
 	s = "ac"
-	fmt.Println(longestPalindrome(s))
+	assertion.Equal("a", longestPalindrome(s))
+
+	s = "ccc"
+	assertion.Equal("ccc", longestPalindrome(s))
 }

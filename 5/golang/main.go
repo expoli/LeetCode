@@ -9,6 +9,9 @@ func longestPalindrome(s string) string {
 		if i != 0 {
 			flag[s[i]] = 0
 		}
+		if n-i < max {
+			break
+		}
 		for j := i; j < n; j++ {
 			if flag[s[j]] == 0 {
 				flag[s[j]] = 1
