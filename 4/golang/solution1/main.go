@@ -10,7 +10,7 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	num := (n1 + n2) / 2
 
 	i, j := 0, 0
-	for i < n1 || j < n2 {
+	for i+j <= num {
 		if n1 == 0 {
 			temp = nums2
 			break
