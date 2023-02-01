@@ -5,31 +5,27 @@ func main() {
 }
 
 func lengthOfLongestSubstring(s string) int {
-	var flag [100]int
+	var flag [128]int
 	n := len(s)
 	result := 0
-	max := 0
+	rk := -1
 	for i := 0; i < n; i++ {
-		char := s[i] - 31
-		if max < result {
-			max = result
+		if i != 0 {
+			flag[s[i-1]] = 0
 		}
-		if flag[char] != 0 {
-			i = i - result + 1
-			result = 0
-			setZero(&flag)
-			char = s[i] - 31
+		// 打标记
+		for rk+1 < n && flag[s[rk+1]] == 0 {
+			flag[s[rk+1]] = 1
+			rk++
 		}
-		flag[char] = 1
-		result += 1
+		result = max(result, rk-i+1)
 	}
-	if max < result {
-		max = result
-	}
-	return max
+	return result
 }
-func setZero(num *[100]int) {
-	for i := 0; i < len(num); i++ {
-		num[i] = 0
+
+func max(x, y int) int {
+	if x < y {
+		return y
 	}
+	return x
 }
