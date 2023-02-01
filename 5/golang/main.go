@@ -1,6 +1,6 @@
 package golang
 
-func longestPalindrome(s string) string {
+func longestPalindrome1(s string) string {
 	var flag [128]int
 	n := len(s)
 	var max int
@@ -40,4 +40,45 @@ func longestPalindrome(s string) string {
 		max++
 	}
 	return s[result : result+max]
+}
+
+/*
+*
+算法思想：选一个数、然后依据这个数同时想前与向后进行拓展
+如果向前的与向后的数值一致的话，那么这个子串就是回文子串
+如果后面未能发现新的子串，那么向右更新子串判断的区间
+*/
+func longestPalindrome(s string) string {
+	n := len(s)
+	if n == 0 {
+		return ""
+	}
+
+	l, r := 0, 0
+	max := 0
+	res := ""
+	for l < n && r < n {
+		if n-r < max/2 {
+			break
+		}
+		i, j := l, r
+		// 由中间向两边进行扩散比对
+		for i >= 0 && j < n && s[i] == s[j] {
+			i--
+			j++
+		}
+		// 计算子串的长度
+		strLen := j - i - 1
+		// 更新最长子串的长度
+		if strLen > max {
+			max = strLen
+			res = s[i+1 : j]
+		}
+		if l == r {
+			r++
+		} else {
+			l++
+		}
+	}
+	return res
 }
