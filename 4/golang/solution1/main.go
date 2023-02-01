@@ -121,3 +121,35 @@ func findMedianSortedArrays2(nums1 []int, nums2 []int) float64 {
 	}
 	return (float64(nums1[i]) + float64(nums2[j])) / 2.0
 }
+
+/*
+*
+空间复杂度为 O(1) 的算法，在所有的值中间找到需要两个数值一左一右
+*/
+func findMedianSortedArrays3(nums1 []int, nums2 []int) float64 {
+	p1, p2 := 0, 0
+	c1, c2 := len(nums1), len(nums2)
+	left, right := -1, -1
+	length := c1 + c2
+	for i := 0; i < length/2+1; i++ {
+		// 从左向右查找
+		left = right
+		// 进入这个分支的情况：
+		// 1. 数组一还未到尽头 且 (数组二已经到尽头 或 数组一当前的值比数组二当前的值小）
+		if p1 < c1 && (p2 >= c2 || nums1[p1] < nums2[p2]) {
+			right = nums1[p1]
+			p1++
+			// 进入这个分支的情况：
+			// 1. 数组二未到尽头，且当前值比数组一的值大
+		} else {
+			right = nums2[p2]
+			p2++
+		}
+	}
+	// 偶数、求算术平均值
+	if length%2 == 0 {
+		return float64(left+right) / 2.0
+	}
+	// 奇数，现在的右值
+	return float64(right)
+}
