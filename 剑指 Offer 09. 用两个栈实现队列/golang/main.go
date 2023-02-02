@@ -6,11 +6,6 @@ type CQueue struct {
 	data []int
 }
 
-type Stack struct {
-	top  int
-	data []int
-}
-
 func Constructor() CQueue {
 	return CQueue{}
 }
