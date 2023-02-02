@@ -4,33 +4,36 @@ import "fmt"
 
 type MinStack struct {
 	top  int
-	data []int
-	min  []int
+	data map[int]int
+	min  map[int]int
 }
 
 /** initialize your data structure here. */
 func Constructor() MinStack {
-	return MinStack{}
+	var s1 MinStack
+	s1.data = make(map[int]int)
+	s1.min = make(map[int]int)
+	return s1
 }
 
 func (this *MinStack) Push(x int) {
 	if this.top == 0 {
-		this.min = append(this.min, x)
+		this.min[this.top] = x
 	} else {
 		if x < this.min[this.top-1] {
-			this.min = append(this.min, x)
+			this.min[this.top] = x
 		} else {
-			this.min = append(this.min, this.min[this.top-1])
+			this.min[this.top] = this.min[this.top-1]
 		}
 	}
-	this.data = append(this.data, x)
+	this.data[this.top] = x
 	this.top++
 }
 
 func (this *MinStack) Pop() {
 	this.top--
-	this.min = this.min[:this.top]
-	this.data = this.data[:this.top]
+	delete(this.min, this.top)
+	delete(this.data, this.top)
 }
 
 func (this *MinStack) Top() int {
