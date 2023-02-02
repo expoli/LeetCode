@@ -1,4 +1,4 @@
-package golang
+package solution1
 
 import (
 	"fmt"

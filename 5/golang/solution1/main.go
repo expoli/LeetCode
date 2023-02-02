@@ -1,4 +1,4 @@
-package golang
+package solution1
 
 func longestPalindrome1(s string) string {
 	var flag [128]int
