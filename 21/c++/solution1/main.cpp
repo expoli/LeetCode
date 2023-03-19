@@ -59,28 +59,20 @@ public:
         if (!list2){
             return list1;
         }
-        ListNode *head = list1;
-        ListNode *pre = list1;
+        ListNode head;
+        ListNode *pre = &head;
         while (list1 && list2){
             if (list1->val <= list2->val){
-                pre = list1;
+                pre->next = list1;
                 list1 = list1->next;
-            }else if (list1 == pre){
-                ListNode *temp = list2;
-                list2 = list1;
-                list1 = temp;
-                head = list1;
             } else{
                 pre->next = list2;
                 list2 = list2->next;
-                pre = pre->next;
-                pre->next=list1;
             }
+            pre = pre->next;
         }
-        if (list2){
-            pre->next = list2;
-        }
-        return head;
+        pre->next = (list1) ? list1 : list2;
+        return head.next;
     }
 };
 
