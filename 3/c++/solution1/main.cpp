@@ -27,9 +27,9 @@ public:
     int lengthOfLongestSubstring(string s) {
         int result = 0;
         int rk = -1;
-        int flag[255];
+        bool flag[255];
         size_t n = s.size();
-        for (int & i : flag) {
+        for (bool & i : flag) {
             i = 0;
         }
         for (int i = 0; i < s.size(); ++i) {
