@@ -37,6 +37,43 @@ public:
     }
 };
 
+class Solution2 {
+public:
+    bool isValid(string s) {
+        string stack="";
+        for(int i=0; i<s.size(); i++){
+            if(s[i]=='(' or s[i]=='[' or s[i]=='{')
+                stack.push_back(s[i]);
+            else if(s[i]==')'){
+                if(stack.size()==0)
+                    return false;
+                char temp=stack[stack.length()-1];
+                stack.pop_back();
+                if(temp!='(')
+                    return false;
+            }
+            else if(s[i]==']'){
+                if(stack.size()==0)
+                    return false;
+                char temp=stack[stack.length()-1];
+                stack.pop_back();
+                if(temp!='[')
+                    return false;
+            }
+            else if(s[i]=='}'){
+                if(stack.size()==0)
+                    return false;
+                char temp=stack[stack.length()-1];
+                stack.pop_back();
+                if(temp!='{')
+                    return false;
+            }
+        }
+        if(stack.size()==0)
+            return true;
+        return false;
+    }
+};
 
 int main()
 {
